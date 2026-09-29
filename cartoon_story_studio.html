@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cartoon Story Studio</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#fff8f0;color:#222}
+header{background:linear-gradient(135deg,#ff7a18,#ff3d81);color:white;padding:28px 18px;text-align:center}
+header h1{margin:0 0 8px;font-size:30px}header p{margin:0;opacity:.95}
+.container{max-width:760px;margin:auto;padding:18px}
+.card{background:white;border-radius:18px;padding:18px;margin:14px 0;box-shadow:0 5px 20px #00000012}
+h2{margin-top:0;font-size:21px}.chips{display:flex;gap:8px;flex-wrap:wrap}
+button,.chip{border:0;border-radius:12px;padding:12px 15px;font-size:15px;cursor:pointer}
+.chip{background:#f2f2f2}.chip.active{background:#ff5b6e;color:white}
+input,select,textarea{width:100%;padding:13px;border:1px solid #ddd;border-radius:12px;font-size:16px;margin:7px 0}
+.main{width:100%;background:#ff4f70;color:white;font-weight:700}
+.output{white-space:pre-wrap;background:#fff5f7;border-radius:14px;padding:15px;line-height:1.55}
+.small{font-size:13px;color:#666}.footer{text-align:center;padding:20px;color:#777}
+</style>
+</head>
+<body>
+<header>
+<h1>🎬 Cartoon Story Studio</h1>
+<p>Hindi कहानी • AI Video Prompt • Voice-over • Dialogue • Sound Effects</p>
+</header>
+
+<div class="container">
+<div class="card">
+<h2>✨ अपनी कहानी बनाइए</h2>
+<label>कहानी का विषय</label>
+<input id="topic" placeholder="जैसे: लड़की और कुत्ता">
+<label>कहानी का प्रकार</label>
+<div class="chips">
+<button class="chip active" onclick="setType(this,'मजेदार')">😂 मजेदार</button>
+<button class="chip" onclick="setType(this,'भावुक')">❤️ भावुक</button>
+<button class="chip" onclick="setType(this,'सीख वाली')">🌟 सीख वाली</button>
+<button class="chip" onclick="setType(this,'रोमांचक')">🚀 रोमांचक</button>
+</div>
+<label>वीडियो लंबाई</label>
+<select id="duration"><option>30 सेकंड</option><option>45 सेकंड</option><option>60 सेकंड</option></select>
+<button class="main" onclick="generate()">🎥 कहानी तैयार करें</button>
+</div>
+
+<div class="card" id="result" style="display:none">
+<h2>📜 आपकी कहानी</h2>
+<div id="output" class="output"></div>
+<button class="main" onclick="copyText()" style="margin-top:10px">📋 कॉपी करें</button>
+</div>
+
+<div class="card">
+<h2>💰 इससे कमाई कैसे करें?</h2>
+<p>इस वेबसाइट पर बाद में Premium कहानी packs, AI prompts, विज्ञापन और paid membership जोड़ी जा सकती है। शुरुआत में free content देकर audience बनाई जा सकती है।</p>
+</div>
+</div>
+
+<div class="footer">© 2026 Cartoon Story Studio</div>
+
+<script>
+let type='मजेदार';
+function setType(el,t){
+ document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));
+ el.classList.add('active'); type=t;
+}
+function generate(){
+ const topic=document.getElementById('topic').value.trim()||'एक लड़की और उसका प्यारा कुत्ता';
+ const duration=document.getElementById('duration').value;
+ const text=`🎬 ${topic} — ${type} कार्टून शॉर्ट
+
+⏱️ लंबाई: ${duration}
+
+SCENE 1 — शुरुआत
+🎥 AI VIDEO PROMPT:
+9:16 vertical 3D cartoon animation, colorful Indian village/town setting, cute expressive characters, cinematic lighting, smooth camera movement, family-friendly, consistent character design.
+
+🎙️ हिंदी VOICE-OVER:
+“एक दिन ${topic} की कहानी शुरू होती है। उसे बिल्कुल अंदाज़ा नहीं था कि आज कुछ खास होने वाला है।”
+
+SCENE 2 — समस्या
+🎥 AI VIDEO PROMPT:
+Same characters and environment, character discovers a small problem, expressive face, medium shot, gentle camera push-in, high-quality 3D cartoon animation, 9:16.
+
+💬 DIALOGUE:
+“अरे! अब मैं क्या करूँ?”
+
+🔊 SOUND:
+हल्का suspense music, footsteps, हवा की आवाज़।
+
+SCENE 3 — कोशिश
+🎥 AI VIDEO PROMPT:
+Character bravely tries to solve the problem, cute emotional expressions, dynamic camera movement, warm cinematic light, colorful family-friendly 3D cartoon style, 9:16.
+
+🎙️ VOICE-OVER:
+“उसने हार नहीं मानी। उसने हिम्मत जुटाई और एक नया रास्ता खोजने लगी।”
+
+SCENE 4 — समाधान
+🎥 AI VIDEO PROMPT:
+Happy resolution, characters smiling, warm golden sunlight, uplifting cinematic ending, detailed 3D cartoon animation, smooth motion, 9:16.
+
+💬 DIALOGUE:
+“हमने कर दिखाया!”
+
+🔊 SOUND:
+Happy music, birds, soft sparkle sound.
+
+🌟 MORAL:
+“मुश्किल समय में हिम्मत और कोशिश कभी नहीं छोड़नी चाहिए।”`;
+
+ document.getElementById('output').textContent=text;
+ document.getElementById('result').style.display='block';
+ document.getElementById('result').scrollIntoView({behavior:'smooth'});
+}
+function copyText(){
+ navigator.clipboard.writeText(document.getElementById('output').textContent);
+ alert('कहानी कॉपी हो गई!');
+}
+</script>
+</body>
+</html>
